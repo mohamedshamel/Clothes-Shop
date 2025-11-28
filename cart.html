@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            background: #fafafa; 
+            padding: 40px; 
+            margin: 0;
+        }
+        h2 { 
+            text-align: center; 
+            font-size: 28px;
+        }
+        .item { 
+            background: white; 
+            padding: 15px; 
+            margin: 12px auto; 
+            width: 55%; 
+            border-radius: 10px; 
+            box-shadow: 0 0 8px #ccc; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .item-name { 
+            font-weight: bold; 
+            font-size: 18px;
+        }
+        .price { 
+            color: green; 
+            font-size: 16px;
+        }
+        .section { 
+            font-size: 14px; 
+            color: #666; 
+            margin-top: 4px;
+        }
+        .btn { 
+            background: black; 
+            color: white; 
+            padding: 6px 18px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 15px;
+        }
+        .btn:hover { 
+            background: #333; 
+        }
+        #checkoutBtn { 
+            margin-top: 25px; 
+            padding: 10px 30px; 
+            font-size: 17px;
+        }
+        .home-btn {
+            background: black;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+        .home-btn:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+  <div style="text-align:center; margin-bottom:25px;">
+  <button class="home-btn" onclick="location.href='index.html'">🏠 الرجوع للرئيسية</button>
+</div>
+
+    <h2>Your Cart 🛒</h2>
+    <div id="cartList"></div>
+
+    <center>
+        <button id="checkoutBtn" class="home-btn" onclick="checkout()">Go to Billing</button>
+    </center>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+function renderCart() {
+  let container = document.getElementById("cartList");
+  container.innerHTML = "";
+
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <h3 style="text-align:center; margin-top:30px; font-size:22px;"><h3>السلة فاضية</h3><button onclick="location.href='index.html'">🏠 الرجوع للرئيسية</button> 😅</h3>
+      <center>
+        <button class="home-btn" onclick="location.href='index.html'">🏠 Return to Home</button>
+      </center>
+    `;
+  } else {
+    cart.forEach((item, index) => {
+      container.innerHTML += `
+        <div class="item">
+          <div>
+            <div class="item-name">${item.name}</div>
+            <div class="price">$${item.price}</div>
+            <div class="section">Section: ${item.section}</div>
+          </div>
+          <button class="btn" onclick="removeItem(${index})">إلغاء</button>
+        </div>
+      `;
+    });
+  }
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function checkout() {
+  if(cart.length === 0){
+    alert("السلة فاضية 😅");
+    return;
+  }
+  
+  location.assign("billing.html");
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
+
+<script>let c=JSON.parse(localStorage.getItem('cart')||'[]');document.getElementById('cartList').innerHTML=c.map(i=>`<div class='item'><div class='item-name'>${i.name}<br><small>القسم: ${item.section}</small><br>$${i.price}</div></div>`).join('');</script>

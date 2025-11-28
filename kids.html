@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>قسم الأطفال</title>
+<style>
+body{font-family:Arial;margin:0;background:#f8f8f8;color:#222}
+header{background:#000;color:#fff;padding:16px;text-align:center;font-size:22px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:20px;max-width:1200px;margin:auto}
+.card{background:#fff;padding:12px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.card img{width:100%;height:260px;object-fit:cover;border-radius:8px}
+.price{color:green;font-weight:bold;margin-bottom:8px}
+.btn{background:#000;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>👶 قسم الأطفال</header>
+<div style="text-align:center; margin:20px;">
+  <a href="index.html">
+    <button style="padding:10px 20px; background:black; color:white; border:none; border-radius:8px; cursor:pointer;">
+      ⬅ الرجوع إلى الرئيسية
+    </button>
+  </a>
+</div>
+
+<div class="products">
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,girl,dress"/><h3>فستان بناتي</h3><div class="price">$17</div><button class="btn" onclick="add('فستان بناتي',17,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,boy,shirt"/><h3>قميص ولادي</h3><div class="price">$14</div><button class="btn" onclick="add('قميص ولادي',14,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,jeans"/><h3>جينز أطفال</h3><div class="price">$19</div><button class="btn" onclick="add('جينز أطفال',19,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,jacket,winter"/><h3>جاكيت شتوي</h3><div class="price">$29</div><button class="btn" onclick="add('جاكيت شتوي',29,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,tshirt,cute"/><h3>تيشيرت أطفال</h3><div class="price">$9</div><button class="btn" onclick="add('تيشيرت أطفال',9,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,hoodie"/><h3>هودي أطفال</h3><div class="price">$16</div><button class="btn" onclick="add('هودي أطفال',16,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,skirt"/><h3>جيب أطفال</h3><div class="price">$12</div><button class="btn" onclick="add('جيب أطفال',12,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,pants"/><h3>بنطلون أطفال</h3><div class="price">$13</div><button class="btn" onclick="add('بنطلون أطفال',13,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,shoes,sport"/><h3>حذاء رياضي</h3><div class="price">$23</div><button class="btn" onclick="add('حذاء رياضي',23,'Kids')">أضف للسلة</button></div>
+<div class="card"><img src="https://source.unsplash.com/400x500/?kids,overall"/><h3>أفرول أطفال</h3><div class="price">$18</div><button class="btn" onclick="add('أفرول أطفال',18,'Kids')">أضف للسلة</button></div>
+</div>
+
+<script>
+function add(name, price, section) {
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push({ name, price, section });
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+</script>
+
+</body>
+</html>
+
+<script>
+function add(n,p,s){let c=JSON.parse(localStorage.getItem('cart')||'[]');c.push({name:n,price:p,section:s});localStorage.setItem('cart',JSON.stringify(c));alert('✅ تم إضافة '+n);}
+</script>
+
+<script>
+function add(name, price, section){
+  let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+  cart.push({name:name, price:price, section:section});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert('✅ تم إضافة '+name+' من قسم '+section);
+}
+</script>

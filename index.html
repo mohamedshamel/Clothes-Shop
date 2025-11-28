@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Clothes Shop</title>
+
+<style>
+body { font-family: Arial; margin:0; background:#f6f6f6; color:#222 }
+header { background:black; color:white; padding:15px; text-align:center; font-size:24px }
+nav { background:#333; padding:10px; text-align:center }
+nav a { color:white; margin:0 15px; text-decoration:none; font-size:18px }
+.sections { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:40px; max-width:1100px; margin:auto }
+.box { background:white; padding:22px; border-radius:14px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.07) }
+.box h2 { font-size:20px; margin-bottom:12px }
+.box p { font-size:15px; margin-bottom:16px; line-height:1.6 }
+.btn { padding:12px 22px; border:none; background:black; color:white; border-radius:8px; cursor:pointer; font-size:15px; text-decoration:none; display:inline-block }
+</style>
+</head>
+<body>
+
+<header>Clothes Shop 🛍️</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="login.html">Login</a>
+  <a href="newaccount.html">Register</a>
+  <a href="cart.html">Cart</a>
+</nav>
+
+<div class="sections">
+
+<div class="box">
+  <h2>قسم النساء</h2>
+  <p>لبس طبيعي وشيك يناسب كل الأذواق</p>
+  <a class="btn" href="women.html">دخول القسم</a>
+</div>
+
+<div class="box">
+  <h2>قسم الرجال</h2>
+  <p>ستايل عادي محترم ينفع في كل وقت</p>
+  <a class="btn" href="men.html">دخول القسم</a>
+</div>
+
+<div class="box">
+  <h2>القسم الديني</h2>
+  <p>تصاميم محتشمة و رايقة من غير مبالغة</p>
+  <a class="btn" href="religious.html">دخول القسم</a>
+</div>
+
+<div class="box">
+  <h2>قسم الأطفال</h2>
+  <p>ملابس عادية ومريحة للأطفال</p>
+  <a class="btn" href="kids.html">دخول القسم</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body { font-family: Arial; background: #fff; padding: 50px; text-align: center; }
+        .receipt { border: 2px dashed black; padding: 30px; width: 400px; margin: auto; }
+        .product { text-align: left; margin-bottom: 10px; }
+        button { margin-top: 20px; padding: 10px 25px; background: black; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #333; }
+    </style>
+</head>
+
+<body>
+
+<div class="receipt" id="invoice">
+    <h2>Purchase Receipt</h2>
+    <p>Thank you for shopping!</p>
+    <div id="details"></div>
+    <p id="total"></p>
+</div>
+
+<!-- زر الطباعة -->
+<button onclick="printInvoice()">طباعة الفاتورة</button>
+
+<script>
+    // جلب بيانات السلة
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let total = 0;
+    let detailsHtml = '';
+
+    // عرض كل منتج مع السعر
+    cart.forEach(item => {
+        detailsHtml += `<div class="product">اسم المنتج: ${item.name} | السعر: $${item.price}</div>`;
+        total += item.price;
+    });
+
+    document.getElementById("details").innerHTML = detailsHtml;
+    document.getElementById("total").innerHTML = `<strong>الإجمالي الكلي: $${total}</strong>`;
+
+    // مسح السلة بعد العرض
+    localStorage.removeItem("cart");
+
+    // دالة الطباعة
+    function printInvoice() {
+        const printContents = document.getElementById('invoice').innerHTML;
+        const original = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = original;
+    }
+</script>
+
+</body>
+</html>

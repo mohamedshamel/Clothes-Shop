@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing</title>
+    <style>
+        body { font-family:Arial; background:#f2f2f2; text-align:center; padding-top:80px; }
+        .box {
+            background:white; padding:40px; width:400px; margin:auto;
+            border-radius:12px; box-shadow:0 0 10px #aaa;
+        }
+        button { background:black; color:white; padding:10px 25px; border:none; border-radius:8px; cursor:pointer; }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Billing Summary</h2>
+    <div id="bill"></div>
+    <br>
+    <button onclick="window.location.href='recept.html'">Generate Receipt</button>
+</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    let total = 0;
+
+    cart.forEach(i => total += i.price);
+
+    document.getElementById("bill").innerHTML =
+        `<h3>Total: $${total}</h3>`;
+</script>
+
+</body>
+</html>
+
+<script>let c=JSON.parse(localStorage.getItem('cart')||'[]');document.body.innerHTML+=c.length?c.map(i=>`<div>${i.name}<br><small>القسم: ${i.section}</small><br>السعر: $${i.price}<hr></div>`).join(''):`<h3>لا يوجد مشتريات</h3>`;</script>
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+document.body.innerHTML += '<h3>🧾 الفاتورة</h3>';
+if(cart.length===0){
+  document.body.innerHTML += "<h3>لا يوجد مشتريات</h3><a href='index.html'><button class='home-btn'>🏠 الرجوع للرئيسية</button></a>";
+}else{
+  cart.forEach(item=>{
+    document.body.innerHTML += `<div><strong>${item.name}</strong><br><small>القسم: ${item.section}</small><br>السعر: $${item.price}<hr></div>`;
+  });
+}
+</script>
