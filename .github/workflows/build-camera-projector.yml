@@ -1,0 +1,48 @@
+name: Build Camera Lens Projector APK
+
+on:
+  push:
+    branches:
+      - camera-lens-projector-apk
+    paths:
+      - 'camera_lens_projector/**'
+      - '.github/workflows/build-camera-projector.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Generate Android project and copy app source
+        run: |
+          flutter create --platforms=android --project-name camera_lens_projector build_project
+          cp camera_lens_projector/pubspec.yaml build_project/pubspec.yaml
+          cp camera_lens_projector/lib/main.dart build_project/lib/main.dart
+          sed -i '/<application/i\    <uses-permission android:name="android.permission.CAMERA" />' build_project/android/app/src/main/AndroidManifest.xml
+          sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 24/' build_project/android/app/build.gradle.kts
+
+      - name: Build release APK
+        run: |
+          cd build_project
+          flutter pub get
+          flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: camera-lens-projector-apk
+          path: build_project/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 7
